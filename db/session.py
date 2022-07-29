@@ -2,7 +2,17 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, create_engine, Float, Boolean, Date
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-engine = create_engine("postgresql+psycopg2://postgres:1@localhost/postgres", echo=False)
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+host = config['database']['host']
+port = config['database']['port']
+username = config['database']['username']
+password = config['database']['password']
+database = config['database']['database']
+
+engine = create_engine(f"postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}", echo=False)
 session = scoped_session(sessionmaker())
 session.configure(bind=engine, autoflush=False, expire_on_commit=False)
 
