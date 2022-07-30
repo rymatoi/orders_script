@@ -17,6 +17,7 @@ if __name__ == '__main__':
     # old_values будет хранить текущее состояние таблицы на гугл диске
     # overdue_notified - те записи, о которых уже уведомили пользователей телеграм, подписанных на отслеживание заказов
     # overdue_notified нужен для того, чтобы дублировать уведомления
+    notified = False
     old_values = tuple()
     overdue_notified = tuple()
     while True:
@@ -41,7 +42,10 @@ if __name__ == '__main__':
                     bot.send_message(user.id,
                                      f'У следующих заказов вчера прошел срок:\n'
                                      f'{format_orders(need_notify)}')
-                overdue_notified += need_notify
+                    notified = True
+                if notified:
+                    overdue_notified += need_notify
+                    notified = False
 
         # скрипт проверяет файл каждые 3 секунды
         time.sleep(3)
