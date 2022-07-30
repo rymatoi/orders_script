@@ -30,3 +30,4 @@ Python 3.8.5
 
 :white_check_mark:Ссылка на файл в Google Disk: https://docs.google.com/spreadsheets/d/1YQ1DBuI5GWDq7r6tuKJ6DEB1yKHku1N4rWKvNYZgwCU/edit?usp=sharing
 
+Запускать нужно run.py
