@@ -33,15 +33,15 @@ if __name__ == '__main__':
         # если есть просроченные заказы, то пользователям посылаются уведомления
         if different_rows['overdue']:
             users = session.get_users()
-            for user in users:
-                # need_notify - те заказы, которые просрочены, но еще не отправлялись как уведомления
-                need_notify = tuple(x for x in different_rows["overdue"] if x not in overdue_notified)
-                if need_notify:
+            need_notify = tuple(x for x in different_rows["overdue"] if x not in overdue_notified)
+            if need_notify:
+                for user in users:
+                    # need_notify - те заказы, которые просрочены, но еще не отправлялись как уведомления
                     # точно так же, как мы уведомляем о просрочках, можно уведомлять о всех изменениях в файле..
                     bot.send_message(user.id,
                                      f'У следующих заказов вчера прошел срок:\n'
                                      f'{format_orders(need_notify)}')
-                    overdue_notified += need_notify
+            overdue_notified += need_notify
 
         # скрипт проверяет файл каждые 3 секунды
         time.sleep(3)
