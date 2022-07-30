@@ -41,7 +41,7 @@ if __name__ == '__main__':
                     bot.send_message(user.id,
                                      f'У следующих заказов вчера прошел срок:\n'
                                      f'{format_orders(need_notify)}')
-            overdue_notified += need_notify
+                overdue_notified += need_notify
 
         # скрипт проверяет файл каждые 3 секунды
         time.sleep(3)
